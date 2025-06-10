@@ -12,7 +12,8 @@ bastr_boxplot(
   stats = NULL,
   save.plot = F,
   path = getwd(),
-  group.colors = NULL
+  group.colors = NULL,
+  pval_stars = F
 )
 }
 \arguments{

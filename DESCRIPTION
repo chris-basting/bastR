@@ -15,4 +15,5 @@ Imports:
     tidyr,
     rstatix,
     ggpubr,
-    ggprism
+    ggprism, 
+    magrittr
