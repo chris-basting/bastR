@@ -12,7 +12,7 @@
 #' @import ggprism
 #' @importFrom rstatix get_y_position
 #' @importFrom ggpubr stat_pvalue_manual
-#' @importFrom dplyr left_join right_join
+#' @importFrom dplyr right_join
 #'
 #'
 
