@@ -1,4 +1,5 @@
-#' Creates a boxplot in the style I like using ggplot
+#' Creates a boxplot in the style I like using ggplot and ggprism to look closer to a Graphpad Prism plot.
+#' Also allows for adding p-values or asterisks to a boxplot that were pre-generated.
 #' @export
 #' @param x (required) A dataframe containing the values to be plotted
 #' @param var (required) The numeric variable to be plotted on y axis
