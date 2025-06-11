@@ -2,7 +2,8 @@
 % Please edit documentation in R/bastr_boxplot.R
 \name{bastr_boxplot}
 \alias{bastr_boxplot}
-\title{Creates a boxplot in the style I like using ggplot}
+\title{Creates a boxplot in the style I like using ggplot and ggprism to look closer to a Graphpad Prism plot.
+Also allows for adding p-values or asterisks to a boxplot that were pre-generated.}
 \usage{
 bastr_boxplot(
   x,
@@ -32,5 +33,6 @@ bastr_boxplot(
 \item{saveplot}{True/False as to whether the plot should be saved to path}
 }
 \description{
-Creates a boxplot in the style I like using ggplot
+Creates a boxplot in the style I like using ggplot and ggprism to look closer to a Graphpad Prism plot.
+Also allows for adding p-values or asterisks to a boxplot that were pre-generated.
 }
