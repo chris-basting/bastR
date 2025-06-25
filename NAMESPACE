@@ -2,6 +2,7 @@
 
 export("%notin%")
 export(bastr_boxplot)
+export(bastr_lm)
 export(is_zero_or_na)
 export(replace_missing)
 import(ggplot2)

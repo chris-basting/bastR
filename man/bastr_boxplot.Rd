@@ -30,6 +30,8 @@ bastr_boxplot(
 
 \item{path}{Filepath for generated plots, default is working directory}
 
+\item{pval_stars}{True/False as to whether p-values should be displayed as asterisks. Defualt is False.}
+
 \item{saveplot}{True/False as to whether the plot should be saved to path}
 }
 \description{
