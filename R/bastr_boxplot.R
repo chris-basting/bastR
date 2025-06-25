@@ -1,6 +1,6 @@
 #' Creates a boxplot in the style I like using ggplot and ggprism to look closer to a Graphpad Prism plot.
 #' Also allows for adding p-values or asterisks to a boxplot that were pre-generated.
-#' @export
+#'
 #' @param x (required) A dataframe containing the values to be plotted
 #' @param var (required) The numeric variable to be plotted on y axis
 #' @param group (required) The categorical variable to be plotted on x axis
@@ -8,6 +8,7 @@
 #' @param title Title for plot
 #' @param stats Data frame containing contrasts and their p-values
 #' @param saveplot True/False as to whether the plot should be saved to path
+#' @param pval_stars True/False as to whether p-values should be displayed as asterisks. Defualt is False.
 #'
 #' @import ggplot2
 #' @import ggprism
@@ -15,9 +16,7 @@
 #' @importFrom ggpubr stat_pvalue_manual
 #' @importFrom dplyr right_join
 #'
-#'
-
-
+#' @export
 bastr_boxplot <- function(x, var, group, title = NULL, stats = NULL, save.plot = F, path = getwd(), group.colors = NULL, pval_stars = F){
 p <- ggplot(data = x, aes(x=!!sym(group), y=!!sym(var))) +
        geom_boxplot(outlier.shape = NA, aes(fill = !!sym(group))) +

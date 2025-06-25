@@ -5,7 +5,6 @@
 #' @name %>%
 #' @rdname pipe
 #' @importFrom magrittr %>%
-#' @export
 NULL
 
 #' Return True/False depending on if value is zero or NA
