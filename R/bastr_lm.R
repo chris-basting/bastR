@@ -8,7 +8,6 @@
 
 bastr_lm <- function(x, vars, formula, check_model = T){
 
-test
 
 }
 
