@@ -16,4 +16,7 @@ Imports:
     rstatix,
     ggpubr,
     ggprism, 
-    magrittr
+    magrittr, 
+    performance,
+    lmerTest, 
+    broom

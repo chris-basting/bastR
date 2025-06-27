@@ -3,16 +3,26 @@
 #' with the same fixed/random effects and different response variables, i.e.,
 #' for many different metabolites or cytokines.
 #'
-#' @export
+#'@param x A data frame containing the predictors and response variables
+#'@param vars A character vector specifying the names of the response variables to generate linear models for
+#'@param formula A character value specifying the formula of predictors to use for each response variable. Should include all fixed and random effects. Example: "age + bmi + (1|PID)"
+#'@param check_model A boolean value specifying if linear model assumptions (e.g., linearity of residuals, heteroscedasticity, outliers) should be tested using the performance R package
+#'
+#'
+#'
+#'@importFrom lmerTest lmer
+#'@importFrom broom tidy
+#'
+#'@export
 #'
 
-bastr_lm <- function(x, vars, formula, check_model = T){
+setClass("MyObject",
+         slots = list(
+           results = "data.frame",
+           models = "list"
+         ))
 
-  setClass("MyObject",
-           slots = list(
-             results = "data.frame",
-             models = "list"
-           ))
+bastr_lm <- function(x, vars, formula, check_model = T){
 
 
   model.list <- list()  # store your models
@@ -21,7 +31,7 @@ bastr_lm <- function(x, vars, formula, check_model = T){
   for (i in c(vars)) {  # loop through predictors
 
     # Build formula safely using backticks
-    formula <- as.formula(paste0("`",var,"`"," ~ ", formula))
+    formula <- as.formula(paste0("`",i,"`"," ~ ", formula))
 
     # Fit model
     model <- lmerTest::lmer(formula, data = x)
@@ -48,6 +58,8 @@ bastr_lm <- function(x, vars, formula, check_model = T){
   result.df <- bind_rows(results)
 
   S4.return <- new("MyObject", results = result.df, models = model.list)
+
+  return(S4.return)
 
 }
 
