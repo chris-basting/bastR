@@ -4,11 +4,11 @@
 \name{bastR_lm-class}
 \alias{bastR_lm-class}
 \title{This is a function for performing and summarizing linear models.
-It is primarily meant to be used for performing many different models
-with the same fixed/random effects and different response variables, i.e.,
+It is primarily meant to be used for generating many different models
+with the same fixed/random effects and different response variables, e.g.,
 for many different metabolites or cytokines. If there are no random
-effects, will use the lm() function. If there are random effects, will
-use the lmerTest() function.}
+effects, this will use the lm() function. If there are random effects, this
+will use the lmerTest() function.}
 \arguments{
 \item{x}{A data frame containing the predictors and response variables}
 
@@ -22,9 +22,9 @@ use the lmerTest() function.}
 }
 \description{
 This is a function for performing and summarizing linear models.
-It is primarily meant to be used for performing many different models
-with the same fixed/random effects and different response variables, i.e.,
+It is primarily meant to be used for generating many different models
+with the same fixed/random effects and different response variables, e.g.,
 for many different metabolites or cytokines. If there are no random
-effects, will use the lm() function. If there are random effects, will
-use the lmerTest() function.
+effects, this will use the lm() function. If there are random effects, this
+will use the lmerTest() function.
 }
