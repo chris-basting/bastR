@@ -29,10 +29,11 @@ setClass("bastR_lm",
 
 bastr_lm <- function(x, vars, fixed_effects, random_effects = NULL, check_model = T){
 
-#test that all vars and effects are in dataframe
-
-
-  if(!is.null(random_effects)){
+  # Check that all variables are present in the data frame
+  missing_vars <- setdiff(vars, colnames(x))
+  if (length(missing_vars) > 0) {
+    stop("Missing required columns: ", paste(missing_vars, collapse = ", "))
+  }
 
   model.list <- list()  # store your models
   results <- list() # store each models results
@@ -42,19 +43,22 @@ bastr_lm <- function(x, vars, fixed_effects, random_effects = NULL, check_model 
     # Build formula safely using backticks
     formula <- as.formula(paste0("`",i,"`"," ~ ", paste0(c(fixed_effects, random_effects), collapse = " + ")))
 
-    # Fit model
+    # Fit model using lm if no random effects, or lmerTest if there are
+    if(!is.null(random_effects)){
     model <- lmerTest::lmer(formula, data = x)
-
+    } else{
+    model <- stats::lm(formula, data = x)
+    }
     #Add model to list of models
-    model.list[[vars]] <- model
+    model.list[[i]] <- model
 
     #Tidy the model output
-    model_tidy <- broom.mixed::tidy(model, effects = "fixed") %>%
+    model_tidy <- broom.mixed::tidy(model, effects = "fixed", conf.int = TRUE) %>%
       filter(term != "(Intercept)")  # keep only the predictor terms
 
     # Save results
-    results[[vars]] <- model_tidy %>%
-      mutate(Variable = vars)
+    results[[i]] <- model_tidy %>%
+      mutate(Variable = i)
 
 
   }
@@ -66,42 +70,12 @@ bastr_lm <- function(x, vars, fixed_effects, random_effects = NULL, check_model 
 
   return(S4.return)
 
-  } else if(is.null(random_effects)){
-
-      model.list <- list()  # store your models
-      results <- list() # store each models results
-
-      for (i in c(vars)) {  # loop through predictors
-
-        # Build formula safely using backticks
-        formula <- as.formula(paste0("`",i,"`"," ~ ", paste0(c(fixed_effects), collapse = " + ")))
-
-        # Fit model
-        model <- stats::lm(formula, data = x)
-
-        #Add model to list of models
-        model.list[[vars]] <- model
-
-        #Tidy the model output
-        model_tidy <- broom.mixed::tidy(model, effects = "fixed") %>%
-          filter(term != "(Intercept)")  # keep only the predictor terms
-
-        # Save results
-        results[[vars]] <- model_tidy %>%
-          mutate(Variable = vars)
-
-
-      }
-
-      # Combine all results into a dataframe
-      result.df <- bind_rows(results)
-
-      S4.return <- new("bastR_lm", results = result.df, models = model.list)
-
-      return(S4.return)
-
-
-  }
-
 }
+
+
+
+
+
+
+
 
